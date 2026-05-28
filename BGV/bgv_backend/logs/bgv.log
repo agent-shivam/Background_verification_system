@@ -1,0 +1,305 @@
+2026-05-28 18:39:37 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 18:40:46 | DEBUG    | app.utils.file_utils:validate_upload:50 | File validated: name=High School (10th) Examination Result.pdf, size=83914 B, mime=application/pdf
+2026-05-28 18:40:46 | DEBUG    | app.utils.file_utils:save_upload:61 | Saved upload → app\uploads\02acaca3d33c408a910da3e899d0faea.pdf
+2026-05-28 18:40:46 | INFO     | app.api.routes.documents:analyze:388 | [/analyze] Processing: 02acaca3d33c408a910da3e899d0faea.pdf
+2026-05-28 18:40:51 | INFO     | app.services.preprocessing.image_processor:pdf_to_images:44 | PDF → 2 page(s) at 300 dpi: 02acaca3d33c408a910da3e899d0faea.pdf
+2026-05-28 18:40:51 | INFO     | app.services.pipeline:run_verify_pipeline:626 | Loaded 2 page(s)
+2026-05-28 18:41:17 | INFO     | app.services.layout.structure_engine:analyse_layout:24 | Detected 4 layout regions
+2026-05-28 18:41:20 | DEBUG    | app.services.preprocessing.image_processor:_deskew:104 | Deskewed by 90.00°
+2026-05-28 18:41:20 | DEBUG    | app.services.preprocessing.image_processor:preprocess_image:146 | Preprocessed image shape: (848, 1200)
+2026-05-28 18:41:20 | INFO     | app.services.ocr.engine:_get_paddle_ocr:30 | Initialising PaddleOCR engines...
+2026-05-28 18:41:32 | INFO     | app.services.ocr.engine:_get_paddle_ocr:50 | PaddleOCR engines ready.
+2026-05-28 18:41:42 | DEBUG    | app.services.ocr.engine:run_ocr:172 | OCR done — 38 lines, avg confidence=88.21%
+2026-05-28 18:41:42 | DEBUG    | app.services.pipeline:_run_ocr_on_pages:481 | Page 1: 38 lines, conf=88.21%
+2026-05-28 18:41:44 | DEBUG    | app.services.preprocessing.image_processor:_deskew:104 | Deskewed by 90.00°
+2026-05-28 18:41:44 | DEBUG    | app.services.preprocessing.image_processor:preprocess_image:146 | Preprocessed image shape: (848, 1200)
+2026-05-28 18:41:47 | DEBUG    | app.services.ocr.engine:run_ocr:172 | OCR done — 3 lines, avg confidence=98.26%
+2026-05-28 18:41:47 | DEBUG    | app.services.pipeline:_run_ocr_on_pages:481 | Page 2: 3 lines, conf=98.26%
+2026-05-28 18:41:47 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   aadhaar: raw_score=0.00, hits=0
+2026-05-28 18:41:47 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   pan: raw_score=0.00, hits=0
+2026-05-28 18:41:47 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   passport: raw_score=0.00, hits=0
+2026-05-28 18:41:47 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   resume: raw_score=0.00, hits=0
+2026-05-28 18:41:47 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   graduation_certificate: raw_score=0.00, hits=0
+2026-05-28 18:41:47 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   marksheet: raw_score=3.00, hits=1
+2026-05-28 18:41:47 | INFO     | app.services.classification.document_classifier:classify_document:160 | Document classified as marksheet (confidence=100.0%, ambiguous=False)
+2026-05-28 18:41:47 | INFO     | app.services.pipeline:run_verify_pipeline:641 | Classified as: marksheet (confidence=100.0%, ambiguous=False)
+2026-05-28 18:41:50 | INFO     | app.services.parsers.field_parser:_get_nlp:36 | spaCy model loaded: en_core_web_sm
+2026-05-28 18:41:51 | DEBUG    | app.services.parsers.field_parser:_parse_certificate:244 | Certificate fields: {'student_name': 'AJAY SHARMA', 'institution': None, 'degree': None, 'year': '2026', 'roll_number': None, 'percentage': None}
+2026-05-28 18:41:51 | INFO     | app.services.pipeline:run_verify_pipeline:652 | Running LLM credential extraction...
+2026-05-28 18:41:51 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:202 | LLM credential extraction → model=nvidia/llama-3.3-nemotron-super-49b-v1, url=https://integrate.api.nvidia.com/v1
+2026-05-28 18:42:00 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:208 | LLM credential extraction done — name=KRISHNA SHARMA, doc_no=1260451525
+2026-05-28 18:42:00 | INFO     | app.services.pipeline:run_verify_pipeline:660 | Running VLM analysis via nvidia / qwen/qwen2.5-vl-72b-instruct...
+2026-05-28 18:42:00 | INFO     | app.services.vlm.claude_vlm:run_vlm_analysis:613 | VLM starting — 1 model(s) in chain
+2026-05-28 18:42:01 | INFO     | app.services.vlm.claude_vlm:_try_models:553 | VLM attempting → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 18:42:12 | INFO     | app.services.vlm.claude_vlm:_try_models:558 | VLM succeeded → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 18:42:12 | WARNING  | app.services.vlm.claude_vlm:run_vlm_analysis:654 | All VLM models failed: VLM returned empty content: {'id': 'chatcmpl-a983ab4e1d99a38e', 'object': 'chat.completion', 'created': 1779973923, 'model': 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': None, 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': 'We need to produce JSON with required fields. Let\'s parse.\n\nDocument type: It\'s a marksheet (High School (10th) Examination Result). So document_type_confirmed: "marksheet".\n\nvlm_confidence: need to estimate. Probably high, maybe 0.95.\n\nfield_validation: need to validate each field.\n\nFields present: Roll No., Candidate Name, Mother\'s Name, Father\'s Name, Date of Birth, District / School Code, then marks details.\n\nLet\'s list each field with OCR value, looks_correct, note.\n\nRoll No.: OCR "1260451525". In image, roll no is 1260451525. Looks correct. Note: none.\n\nCandidate Name: OCR "KRISHNA SHARMA". In image, Candidate Name is KRISHNA SHARMA. Looks correct.\n\nMother\'s Name: OCR "SARITA SHARMA". In image, Mother\'s Name is SARITA SHARMA. Looks correct.\n\nFather\'s Name: OCR "AJAY SHARMA". In image, Father\'s Name is AJAY SHARMA. Looks correct.\n\nDate of Birth: OCR "10 / 07 / 2011". In image, Date of Birth is 10 / 07 / 2011. Looks correct.\n\nDistrict / School Code: OCR "14 / 1318". In image, District / School Code is 14 / 1318. Looks correct.\n\nNow marks details: subjects and scores.\n\nWe need to validate each subject row.\n\nHINDI: Theory 052, Practical 030, Total 082, Grade A2. In image: HINDI row shows Theory 052, Practical 030, Total 082, Grade A2. Looks correct.\n\nENGLISH: Theory 052, Practical 030, Total 082, Grade A2. Looks correct.\n\nMATHEMATICS: Theory 029, Practical 030, Total 059, Grade C1. In image: Mathematics row shows Theory 029, Practical 030, Total 059, Grade C1. Looks correct.\n\nSCIENCE: Theory 039, Practical 030, Total 069, Grade B2. In image: Science row shows Theory 039, Practical 030, Total 069, Grade B2. Looks correct.\n\nSOCIAL SCIENCE: Theory 052, Practical 030, Total 082, Grade A2. Looks correct.\n\nDRAWING: Theory 053, Practical 030, Total 083, Grade A2. In image: Drawing row shows Theory 053, Practical 030, Total 083, Grade A2. Looks correct.\n\nResult: PASSED. Looks correct.\n\nPotential inconsistencies: The total marks for each subject seem to be sum of theory + practical (e.g., 52+30=82). For Mathematics: 29+30=59 correct. For Science: 39+30=69 correct. For Drawing: 53+30=83 correct. So consistent.\n\nAny logical inconsistencies: The date of birth 10/07/2011 means candidate is about 15 years old (as of 2026). That\'s plausible for 10th grade. Roll number 1260451525 seems long but okay.\n\nPotential fraud signals: None obvious. All fields consistent.\n\nFont consistency: The document uses consistent fonts (likely standard). So "consistent".\n\nLayout authenticity: Looks like a standard result sheet, likely authentic. So "authentic".\n\nSeal_signature_present: Not visible in image; there is no seal or signature shown. So false.\n\nVisible tampering: No evidence. So false.\n\nOverall assessment: "genuine".\n\nReasoning: The document shows a consistent layout, correct data alignment, proper sums, and no signs of alteration or mismatched information.\n\nSuggested_risk_adjustment: 0 (since genuine). But range -20 to 40. 0 is within.\n\nNow produce JSON.\n\nNeed to ensure keys exactly as required: "document_type_confirmed", "vlm_confidence", "field_validation", "logical_inconsistencies", "fraud_signals", "font_consistency", "layout_authenticity", "seal_signature_present", "visible_tampering", "overall_assessment", "reasoning", "suggested_risk_adjustment', 'reasoning_content': 'We need to produce JSON with required fields. Let\'s parse.\n\nDocument type: It\'s a marksheet (High School (10th) Examination Result). So document_type_confirmed: "marksheet".\n\nvlm_confidence: need to estimate. Probably high, maybe 0.95.\n\nfield_validation: need to validate each field.\n\nFields present: Roll No., Candidate Name, Mother\'s Name, Father\'s Name, Date of Birth, District / School Code, then marks details.\n\nLet\'s list each field with OCR value, looks_correct, note.\n\nRoll No.: OCR "1260451525". In image, roll no is 1260451525. Looks correct. Note: none.\n\nCandidate Name: OCR "KRISHNA SHARMA". In image, Candidate Name is KRISHNA SHARMA. Looks correct.\n\nMother\'s Name: OCR "SARITA SHARMA". In image, Mother\'s Name is SARITA SHARMA. Looks correct.\n\nFather\'s Name: OCR "AJAY SHARMA". In image, Father\'s Name is AJAY SHARMA. Looks correct.\n\nDate of Birth: OCR "10 / 07 / 2011". In image, Date of Birth is 10 / 07 / 2011. Looks correct.\n\nDistrict / School Code: OCR "14 / 1318". In image, District / School Code is 14 / 1318. Looks correct.\n\nNow marks details: subjects and scores.\n\nWe need to validate each subject row.\n\nHINDI: Theory 052, Practical 030, Total 082, Grade A2. In image: HINDI row shows Theory 052, Practical 030, Total 082, Grade A2. Looks correct.\n\nENGLISH: Theory 052, Practical 030, Total 082, Grade A2. Looks correct.\n\nMATHEMATICS: Theory 029, Practical 030, Total 059, Grade C1. In image: Mathematics row shows Theory 029, Practical 030, Total 059, Grade C1. Looks correct.\n\nSCIENCE: Theory 039, Practical 030, Total 069, Grade B2. In image: Science row shows Theory 039, Practical 030, Total 069, Grade B2. Looks correct.\n\nSOCIAL SCIENCE: Theory 052, Practical 030, Total 082, Grade A2. Looks correct.\n\nDRAWING: Theory 053, Practical 030, Total 083, Grade A2. In image: Drawing row shows Theory 053, Practical 030, Total 083, Grade A2. Looks correct.\n\nResult: PASSED. Looks correct.\n\nPotential inconsistencies: The total marks for each subject seem to be sum of theory + practical (e.g., 52+30=82). For Mathematics: 29+30=59 correct. For Science: 39+30=69 correct. For Drawing: 53+30=83 correct. So consistent.\n\nAny logical inconsistencies: The date of birth 10/07/2011 means candidate is about 15 years old (as of 2026). That\'s plausible for 10th grade. Roll number 1260451525 seems long but okay.\n\nPotential fraud signals: None obvious. All fields consistent.\n\nFont consistency: The document uses consistent fonts (likely standard). So "consistent".\n\nLayout authenticity: Looks like a standard result sheet, likely authentic. So "authentic".\n\nSeal_signature_present: Not visible in image; there is no seal or signature shown. So false.\n\nVisible tampering: No evidence. So false.\n\nOverall assessment: "genuine".\n\nReasoning: The document shows a consistent layout, correct data alignment, proper sums, and no signs of alteration or mismatched information.\n\nSuggested_risk_adjustment: 0 (since genuine). But range -20 to 40. 0 is within.\n\nNow produce JSON.\n\nNeed to ensure keys exactly as required: "document_type_confirmed", "vlm_confidence", "field_validation", "logical_inconsistencies", "fraud_signals", "font_consistency", "layout_authenticity", "seal_signature_present", "visible_tampering", "overall_assessment", "reasoning", "suggested_risk_adjustment'}, 'logprobs': None, 'finish_reason': 'length', 'stop_reason': None, 'token_ids': None}], 'service_tier': None, 'system_fingerprint': None, 'usage': {'prompt_tokens': 4198, 'total_tokens': 5222, 'completion_tokens': 1024, 'prompt_tokens_details': None}, 'prompt_logprobs': None, 'prompt_token_ids': None, 'kv_transfer_params': None}
+2026-05-28 18:42:14 | DEBUG    | app.services.forgery.ela:run_ela:75 | ELA → score=0.87, result=clean
+2026-05-28 18:42:14 | DEBUG    | app.services.forgery.blur:detect_blur:59 | Blur → variance=772.02, result=sharp
+2026-05-28 18:42:14 | DEBUG    | app.services.forgery.metadata:analyse_metadata:43 | Metadata: PDF file — EXIF analysis not applicable, skipping
+2026-05-28 18:42:17 | DEBUG    | app.services.forgery.duplicate_regions:detect_duplicate_regions:92 | ORB → keypoints=1002, suspicious_pairs=0, result=not_detected
+2026-05-28 18:42:17 | DEBUG    | app.services.forgery.layout_validator:validate_layout:136 | Layout validation → valid (marksheet)
+2026-05-28 18:42:17 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_dct_anomaly:97 | DCT mid-freq ratio=0.0011
+2026-05-28 18:42:17 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_noise_uniformity:130 | Noise uniformity=0.3482
+2026-05-28 18:42:17 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_edge_density:140 | Edge density=0.0206
+2026-05-28 18:42:17 | DEBUG    | app.services.forgery.ai_artifact_detector:detect_ai_artifacts:64 | AI artifact detection → flags=[False, False, False], positives=0, result=not_detected
+2026-05-28 18:42:17 | INFO     | app.services.validation.field_validator:finalise:64 | Validation: 1/2 checks passed (0 critical failure(s))
+2026-05-28 18:42:17 | INFO     | app.services.pipeline:run_verify_pipeline:781 | Verify pipeline done — type=marksheet, risk=8, status=Likely Genuine, vlm=unknown, validation=1/2 checks passed (0 critical failure(s)), time=91473ms
+2026-05-28 18:42:18 | DEBUG    | app.utils.file_utils:cleanup_file:70 | Cleaned up temp file: app\uploads\02acaca3d33c408a910da3e899d0faea.pdf
+2026-05-28 18:56:21 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 21:18:36 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 21:19:28 | DEBUG    | app.utils.file_utils:validate_upload:50 | File validated: name=krishna aadhar.pdf, size=1436364 B, mime=application/pdf
+2026-05-28 21:19:28 | DEBUG    | app.utils.file_utils:save_upload:61 | Saved upload → app\uploads\192cc9b311d04a6da49de097382d89d6.pdf
+2026-05-28 21:19:28 | INFO     | app.api.routes.documents:analyze:388 | [/analyze] Processing: 192cc9b311d04a6da49de097382d89d6.pdf
+2026-05-28 21:19:33 | INFO     | app.services.preprocessing.image_processor:pdf_to_images:44 | PDF → 1 page(s) at 300 dpi: 192cc9b311d04a6da49de097382d89d6.pdf
+2026-05-28 21:19:33 | INFO     | app.services.pipeline:run_verify_pipeline:626 | Loaded 1 page(s)
+2026-05-28 21:20:05 | INFO     | app.services.layout.structure_engine:analyse_layout:24 | Detected 2 layout regions
+2026-05-28 21:20:09 | DEBUG    | app.services.preprocessing.image_processor:preprocess_image:146 | Preprocessed image shape: (1552, 1200)
+2026-05-28 21:20:09 | INFO     | app.services.ocr.engine:_get_paddle_ocr:33 | Initialising PaddleOCR engines…
+2026-05-28 21:20:24 | INFO     | app.services.ocr.engine:_get_paddle_ocr:53 | PaddleOCR engines ready.
+2026-05-28 21:20:49 | DEBUG    | app.services.ocr.engine:_run_paddle:200 | PaddleOCR: 87 lines extracted
+2026-05-28 21:20:49 | INFO     | app.services.ocr.engine:run_ocr:351 | Tesseract not available — using PaddleOCR only
+2026-05-28 21:20:49 | DEBUG    | app.services.ocr.engine:run_ocr:355 | OCR done — 87 lines, avg confidence=83.43%
+2026-05-28 21:20:49 | DEBUG    | app.services.pipeline:_run_ocr_on_pages:481 | Page 1: 87 lines, conf=83.43%
+2026-05-28 21:20:49 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   aadhaar: raw_score=11.50, hits=5
+2026-05-28 21:20:49 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   pan: raw_score=0.00, hits=0
+2026-05-28 21:20:49 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   passport: raw_score=0.00, hits=0
+2026-05-28 21:20:49 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   resume: raw_score=1.00, hits=1
+2026-05-28 21:20:49 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   graduation_certificate: raw_score=0.00, hits=0
+2026-05-28 21:20:49 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   marksheet: raw_score=0.00, hits=0
+2026-05-28 21:20:49 | INFO     | app.services.classification.document_classifier:classify_document:160 | Document classified as aadhaar (confidence=92.0%, ambiguous=False)
+2026-05-28 21:20:49 | INFO     | app.services.pipeline:run_verify_pipeline:641 | Classified as: aadhaar (confidence=92.0%, ambiguous=False)
+2026-05-28 21:20:49 | DEBUG    | app.services.parsers.field_parser:_parse_aadhaar:119 | Aadhaar fields: {'name': 'Krishna Sharma', 'dob': '10/07/2011', 'gender': None, 'aadhaar_number': '754219162433', 'address': 'C0: Ajay Sharma, Near Rallway statlon, Valshall, HR 4a aa aR yrqff n, Colony Doymi Road, Hapur, P0: Hapur, DIST:, 1 34 44 35 aqpqu, 1 3q3R /, Utr Pradesh - 245101, Aadhaar is proof of identity, not of citizenship', 'pincode': '245101'}
+2026-05-28 21:20:49 | INFO     | app.services.pipeline:run_verify_pipeline:652 | Running LLM credential extraction...
+2026-05-28 21:20:49 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:202 | LLM credential extraction → model=nvidia/llama-3.3-nemotron-super-49b-v1, url=https://integrate.api.nvidia.com/v1
+2026-05-28 21:21:53 | WARNING  | app.services.llm.credential_extractor:extract_credentials_with_llm:223 | LLM credential extraction failed: The read operation timed out
+2026-05-28 21:21:53 | INFO     | app.services.pipeline:run_verify_pipeline:660 | Running VLM analysis via nvidia / qwen/qwen2.5-vl-72b-instruct...
+2026-05-28 21:21:53 | INFO     | app.services.vlm.claude_vlm:run_vlm_analysis:613 | VLM starting — 1 model(s) in chain
+2026-05-28 21:21:53 | INFO     | app.services.vlm.claude_vlm:_try_models:553 | VLM attempting → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 21:22:01 | INFO     | app.services.vlm.claude_vlm:_try_models:558 | VLM succeeded → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 21:22:01 | WARNING  | app.services.vlm.claude_vlm:run_vlm_analysis:654 | All VLM models failed: VLM returned empty content: {'id': 'chatcmpl-8b9af29b0e1b23c8', 'object': 'chat.completion', 'created': 1779983518, 'model': 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': None, 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': 'We need to produce JSON with fields. Let\'s parse.\n\nDocument type: It\'s an Aadhaar card (government ID). So document_type_confirmed: "aadhaar".\n\nvlm_confidence: need to assess OCR confidence. The OCR text seems garbled but includes many correct fields. Probably moderate confidence. Let\'s estimate 0.8.\n\nfield_validation: need to list fields: name, address, mobile, pin code, enrolment number, aadhaar number, vid, date of birth, etc.\n\nWe need to compare OCR values with expected correct values from image.\n\nLet\'s extract from image:\n\n- Name: "Krishna Sharma" (both sides). OCR shows "Krishna Sharma". Looks correct.\n\n- C/O: "Ajay Sharma". OCR shows "C/0: Ajay Sharma". Looks correct.\n\n- Address: "Near Railway station, Vaishali Colony Doymi Road, Hapur, PO: Hapur, Sub District: Hapur, District: Hapur, State: Uttar Pradesh, PIN Code: 245101". OCR shows similar but some garbled. Let\'s see OCR snippet: "Near Railway station, qnt 3 q aA A dsif t 3uR f aTHi4 T ar Vaishali Calany Doymi Rnad, 9<ch 10 a$ # aHazH Qc5 a 3TuR 3r93C anQT am$u 1 VTC: Hapur, 3Hur fafT a4Rr 3 #aR4T 9Ra/Aar3it anT aH a P0: Hapur. 4 1 Sub Distict: Hapur, 3HQr 39nT q\\\\aI$qI aj4 3 $A 3$Sr 393c< 1 Districr: Hapur, 1 e SS h nfhh J $ P l yph glf State: Uttar Pradesh, P h hh +tP/ PIN Code: 245101". So OCR includes "PIN Code: 245101". That\'s correct.\n\n- Mobile: "9719990183". OCR shows "Mobile: 9719990183". Correct.\n\n- Enrolment No.: "2728/24511/77829". OCR shows "Enrolment No.: 2728/24511/77829". Correct.\n\n- Aadhaar No.: "7542 1916 2433". OCR shows "7542 1916 2433". Correct.\n\n- VID: "9121 8535 8801 5912". OCR shows "VID :91218535 8801 5912". Slight spacing but value matches.\n\n- Date of Birth: "10/07/2011". OCR shows "D0B: 10/07/2011". Correct.\n\n- Gender: "MALE". OCR shows "MAL E"? Actually "MAL E" maybe "MALE". In image: "मुल् / MALE". OCR maybe "MAL E". Let\'s see OCR snippet: "मुल् / MALE". So gender correct.\n\n- Signature Not Verified: "Signature Not Verified". OCR shows "Signature Not Verified". Good.\n\n- QR code present: yes.\n\n- Photo: present.\n\n- Date of issue: "10/01/2017". OCR maybe not captured. Not needed.\n\n- Date of enrolment maybe not visible.\n\n- "Aadhaar is proof of identity, not of citizenship or date of birth." etc. That\'s fine.\n\nPotential inconsistencies:\n\n- The address line includes "Near Railway station, Vaishali Colony Doymi Road, Hapur". OCR shows "Near Railway station, qnt 3 q aA A dsif t 3uR f aTHi4 T ar Vaishali Calany Doymi Rnad". That\'s garbled but still matches.\n\n- The "C/O: Ajay Sharma" is correct.\n\n- The "PIN Code: 245101" matches.\n\n- The "Mobile: 9719990183" matches.\n\n- The "Aadhaar No." appears twice: 7542 1916 2433 (both sides). That\'s consistent', 'reasoning_content': 'We need to produce JSON with fields. Let\'s parse.\n\nDocument type: It\'s an Aadhaar card (government ID). So document_type_confirmed: "aadhaar".\n\nvlm_confidence: need to assess OCR confidence. The OCR text seems garbled but includes many correct fields. Probably moderate confidence. Let\'s estimate 0.8.\n\nfield_validation: need to list fields: name, address, mobile, pin code, enrolment number, aadhaar number, vid, date of birth, etc.\n\nWe need to compare OCR values with expected correct values from image.\n\nLet\'s extract from image:\n\n- Name: "Krishna Sharma" (both sides). OCR shows "Krishna Sharma". Looks correct.\n\n- C/O: "Ajay Sharma". OCR shows "C/0: Ajay Sharma". Looks correct.\n\n- Address: "Near Railway station, Vaishali Colony Doymi Road, Hapur, PO: Hapur, Sub District: Hapur, District: Hapur, State: Uttar Pradesh, PIN Code: 245101". OCR shows similar but some garbled. Let\'s see OCR snippet: "Near Railway station, qnt 3 q aA A dsif t 3uR f aTHi4 T ar Vaishali Calany Doymi Rnad, 9<ch 10 a$ # aHazH Qc5 a 3TuR 3r93C anQT am$u 1 VTC: Hapur, 3Hur fafT a4Rr 3 #aR4T 9Ra/Aar3it anT aH a P0: Hapur. 4 1 Sub Distict: Hapur, 3HQr 39nT q\\\\aI$qI aj4 3 $A 3$Sr 393c< 1 Districr: Hapur, 1 e SS h nfhh J $ P l yph glf State: Uttar Pradesh, P h hh +tP/ PIN Code: 245101". So OCR includes "PIN Code: 245101". That\'s correct.\n\n- Mobile: "9719990183". OCR shows "Mobile: 9719990183". Correct.\n\n- Enrolment No.: "2728/24511/77829". OCR shows "Enrolment No.: 2728/24511/77829". Correct.\n\n- Aadhaar No.: "7542 1916 2433". OCR shows "7542 1916 2433". Correct.\n\n- VID: "9121 8535 8801 5912". OCR shows "VID :91218535 8801 5912". Slight spacing but value matches.\n\n- Date of Birth: "10/07/2011". OCR shows "D0B: 10/07/2011". Correct.\n\n- Gender: "MALE". OCR shows "MAL E"? Actually "MAL E" maybe "MALE". In image: "मुल् / MALE". OCR maybe "MAL E". Let\'s see OCR snippet: "मुल् / MALE". So gender correct.\n\n- Signature Not Verified: "Signature Not Verified". OCR shows "Signature Not Verified". Good.\n\n- QR code present: yes.\n\n- Photo: present.\n\n- Date of issue: "10/01/2017". OCR maybe not captured. Not needed.\n\n- Date of enrolment maybe not visible.\n\n- "Aadhaar is proof of identity, not of citizenship or date of birth." etc. That\'s fine.\n\nPotential inconsistencies:\n\n- The address line includes "Near Railway station, Vaishali Colony Doymi Road, Hapur". OCR shows "Near Railway station, qnt 3 q aA A dsif t 3uR f aTHi4 T ar Vaishali Calany Doymi Rnad". That\'s garbled but still matches.\n\n- The "C/O: Ajay Sharma" is correct.\n\n- The "PIN Code: 245101" matches.\n\n- The "Mobile: 9719990183" matches.\n\n- The "Aadhaar No." appears twice: 7542 1916 2433 (both sides). That\'s consistent'}, 'logprobs': None, 'finish_reason': 'length', 'stop_reason': None, 'token_ids': None}], 'service_tier': None, 'system_fingerprint': None, 'usage': {'prompt_tokens': 5508, 'total_tokens': 6532, 'completion_tokens': 1024, 'prompt_tokens_details': None}, 'prompt_logprobs': None, 'prompt_token_ids': None, 'kv_transfer_params': None}
+2026-05-28 21:22:05 | DEBUG    | app.services.forgery.ela:run_ela:75 | ELA → score=2.62, result=clean
+2026-05-28 21:22:06 | DEBUG    | app.services.forgery.blur:detect_blur:59 | Blur → variance=3282.74, result=sharp
+2026-05-28 21:22:06 | DEBUG    | app.services.forgery.metadata:analyse_metadata:43 | Metadata: PDF file — EXIF analysis not applicable, skipping
+2026-05-28 21:22:08 | DEBUG    | app.services.forgery.duplicate_regions:detect_duplicate_regions:92 | ORB → keypoints=1000, suspicious_pairs=0, result=not_detected
+2026-05-28 21:22:09 | DEBUG    | app.services.forgery.layout_validator:validate_layout:136 | Layout validation → valid (aadhaar)
+2026-05-28 21:22:09 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_dct_anomaly:97 | DCT mid-freq ratio=0.0014
+2026-05-28 21:22:09 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_noise_uniformity:130 | Noise uniformity=0.8209
+2026-05-28 21:22:09 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_edge_density:140 | Edge density=0.0506
+2026-05-28 21:22:09 | DEBUG    | app.services.forgery.ai_artifact_detector:detect_ai_artifacts:64 | AI artifact detection → flags=[False, False, False], positives=0, result=not_detected
+2026-05-28 21:22:11 | INFO     | app.services.qr.qr_decoder:decode_qr:56 | QR decoded (pyzbar) — 3034 chars, type=QRCODE
+2026-05-28 21:22:11 | INFO     | app.services.pipeline:run_verify_pipeline:696 | Running deep Aadhaar verification suite (Verhoeff + SecureQR + Font + Layout)...
+2026-05-28 21:22:11 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:103 | Aadhaar Check 1: Verhoeff checksum
+2026-05-28 21:22:11 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 21:22:11 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:112 | ✅ Verhoeff: PASS
+2026-05-28 21:22:11 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:123 | Aadhaar Check 2+3: Secure QR + OCR cross-match
+2026-05-28 21:22:12 | INFO     | app.services.aadhar.secure_qr:_extract_qr_bytes:124 | QR found via pyzbar — 3034 bytes
+2026-05-28 21:22:12 | INFO     | app.services.aadhar.secure_qr:_parse_text_payload:325 | Text QR parsed — fields: []
+2026-05-28 21:22:12 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:159 | ⚠️ QR cross-validation: suspicious
+2026-05-28 21:22:12 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:169 | Aadhaar Check 4: Font consistency
+2026-05-28 21:22:13 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:182 | ✅ Font consistency: CONSISTENT
+2026-05-28 21:22:13 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:195 | Aadhaar Check 5: Layout authenticity
+2026-05-28 21:22:13 | WARNING  | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:207 | ⚠️ Layout: SUSPICIOUS
+2026-05-28 21:22:13 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:245 | Aadhaar verification: 2/2 checks passed | penalty=22 | risk=high | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 21:22:13 | INFO     | app.services.pipeline:run_verify_pipeline:733 | Aadhaar deep verification: Aadhaar verification: 2/2 checks passed | penalty=22 | risk=high | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 21:22:14 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 21:22:14 | INFO     | app.services.validation.field_validator:finalise:64 | Validation: 8/8 checks passed (0 critical failure(s))
+2026-05-28 21:22:14 | INFO     | app.services.pipeline:run_verify_pipeline:761 | After Aadhaar deep verification: risk_score=30 (aadhaar_penalty=22)
+2026-05-28 21:22:14 | INFO     | app.services.pipeline:run_verify_pipeline:781 | Verify pipeline done — type=aadhaar, risk=30, status=Suspicious, vlm=unknown, validation=8/8 checks passed (0 critical failure(s)), time=165762ms
+2026-05-28 21:22:14 | DEBUG    | app.utils.file_utils:cleanup_file:70 | Cleaned up temp file: app\uploads\192cc9b311d04a6da49de097382d89d6.pdf
+2026-05-28 21:32:57 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 22:17:50 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 22:18:49 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 22:19:18 | DEBUG    | app.utils.file_utils:validate_upload:50 | File validated: name=krishna aadhar.pdf, size=1436364 B, mime=application/pdf
+2026-05-28 22:19:18 | DEBUG    | app.utils.file_utils:save_upload:61 | Saved upload → app\uploads\dfb9b4fb173f47cc875185d63fa87a70.pdf
+2026-05-28 22:19:18 | INFO     | app.api.routes.documents:analyze:388 | [/analyze] Processing: dfb9b4fb173f47cc875185d63fa87a70.pdf
+2026-05-28 22:19:21 | INFO     | app.services.preprocessing.image_processor:pdf_to_images:44 | PDF → 1 page(s) at 300 dpi: dfb9b4fb173f47cc875185d63fa87a70.pdf
+2026-05-28 22:19:21 | INFO     | app.services.pipeline:run_verify_pipeline:626 | Loaded 1 page(s)
+2026-05-28 22:19:48 | INFO     | app.services.layout.structure_engine:analyse_layout:24 | Detected 2 layout regions
+2026-05-28 22:19:51 | DEBUG    | app.services.preprocessing.image_processor:preprocess_image:146 | Preprocessed image shape: (1552, 1200)
+2026-05-28 22:19:51 | INFO     | app.services.ocr.engine:_get_paddle_ocr:33 | Initialising PaddleOCR engines…
+2026-05-28 22:20:06 | INFO     | app.services.ocr.engine:_get_paddle_ocr:53 | PaddleOCR engines ready.
+2026-05-28 22:20:29 | DEBUG    | app.services.ocr.engine:_run_paddle:200 | PaddleOCR: 87 lines extracted
+2026-05-28 22:20:29 | INFO     | app.services.ocr.engine:run_ocr:351 | Tesseract not available — using PaddleOCR only
+2026-05-28 22:20:29 | DEBUG    | app.services.ocr.engine:run_ocr:355 | OCR done — 87 lines, avg confidence=83.43%
+2026-05-28 22:20:29 | DEBUG    | app.services.pipeline:_run_ocr_on_pages:481 | Page 1: 87 lines, conf=83.43%
+2026-05-28 22:20:29 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   aadhaar: raw_score=11.50, hits=5
+2026-05-28 22:20:29 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   pan: raw_score=0.00, hits=0
+2026-05-28 22:20:29 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   passport: raw_score=0.00, hits=0
+2026-05-28 22:20:29 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   resume: raw_score=1.00, hits=1
+2026-05-28 22:20:29 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   graduation_certificate: raw_score=0.00, hits=0
+2026-05-28 22:20:29 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   marksheet: raw_score=0.00, hits=0
+2026-05-28 22:20:29 | INFO     | app.services.classification.document_classifier:classify_document:160 | Document classified as aadhaar (confidence=92.0%, ambiguous=False)
+2026-05-28 22:20:29 | INFO     | app.services.pipeline:run_verify_pipeline:641 | Classified as: aadhaar (confidence=92.0%, ambiguous=False)
+2026-05-28 22:20:29 | DEBUG    | app.services.parsers.field_parser:_parse_aadhaar:119 | Aadhaar fields: {'name': 'Krishna Sharma', 'dob': '10/07/2011', 'gender': None, 'aadhaar_number': '754219162433', 'address': 'C0: Ajay Sharma, Near Rallway statlon, Valshall, HR 4a aa aR yrqff n, Colony Doymi Road, Hapur, P0: Hapur, DIST:, 1 34 44 35 aqpqu, 1 3q3R /, Utr Pradesh - 245101, Aadhaar is proof of identity, not of citizenship', 'pincode': '245101'}
+2026-05-28 22:20:29 | INFO     | app.services.pipeline:run_verify_pipeline:652 | Running LLM credential extraction...
+2026-05-28 22:20:29 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:202 | LLM credential extraction → model=nvidia/llama-3.3-nemotron-super-49b-v1, url=https://integrate.api.nvidia.com/v1
+2026-05-28 22:20:43 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:208 | LLM credential extraction done — name=Krishna Sharma, doc_no=754219162433
+2026-05-28 22:20:43 | INFO     | app.services.pipeline:run_verify_pipeline:660 | Running VLM analysis via nvidia / qwen/qwen2.5-vl-72b-instruct...
+2026-05-28 22:20:43 | INFO     | app.services.vlm.claude_vlm:run_vlm_analysis:613 | VLM starting — 1 model(s) in chain
+2026-05-28 22:20:44 | INFO     | app.services.vlm.claude_vlm:_try_models:553 | VLM attempting → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 22:20:51 | INFO     | app.services.vlm.claude_vlm:_try_models:558 | VLM succeeded → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 22:20:51 | WARNING  | app.services.vlm.claude_vlm:run_vlm_analysis:675 | All VLM models failed: Expecting value: line 1 column 1 (char 0)
+2026-05-28 22:20:53 | DEBUG    | app.services.forgery.ela:run_ela:75 | ELA → score=2.62, result=clean
+2026-05-28 22:20:54 | DEBUG    | app.services.forgery.blur:detect_blur:59 | Blur → variance=3282.74, result=sharp
+2026-05-28 22:20:54 | DEBUG    | app.services.forgery.metadata:analyse_metadata:43 | Metadata: PDF file — EXIF analysis not applicable, skipping
+2026-05-28 22:20:55 | DEBUG    | app.services.forgery.duplicate_regions:detect_duplicate_regions:92 | ORB → keypoints=1000, suspicious_pairs=0, result=not_detected
+2026-05-28 22:20:55 | DEBUG    | app.services.forgery.layout_validator:validate_layout:136 | Layout validation → valid (aadhaar)
+2026-05-28 22:20:55 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_dct_anomaly:97 | DCT mid-freq ratio=0.0014
+2026-05-28 22:20:56 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_noise_uniformity:130 | Noise uniformity=0.8209
+2026-05-28 22:20:56 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_edge_density:140 | Edge density=0.0506
+2026-05-28 22:20:56 | DEBUG    | app.services.forgery.ai_artifact_detector:detect_ai_artifacts:64 | AI artifact detection → flags=[False, False, False], positives=0, result=not_detected
+2026-05-28 22:20:58 | INFO     | app.services.qr.qr_decoder:decode_qr:56 | QR decoded (pyzbar) — 3034 chars, type=QRCODE
+2026-05-28 22:20:59 | INFO     | app.services.pipeline:run_verify_pipeline:696 | Running deep Aadhaar verification suite (Verhoeff + SecureQR + Font + Layout)...
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:103 | Aadhaar Check 1: Verhoeff checksum
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:112 | ✅ Verhoeff: PASS
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:123 | Aadhaar Check 2+3: Secure QR + OCR cross-match
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.secure_qr:_extract_qr_bytes:129 | QR found via pyzbar — 3034 bytes
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.secure_qr:_parse_text_payload:484 | Text QR parsed — fields: []
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:159 | ⚠️ QR cross-validation: suspicious
+2026-05-28 22:20:59 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:169 | Aadhaar Check 4: Font consistency
+2026-05-28 22:21:00 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:182 | ✅ Font consistency: CONSISTENT
+2026-05-28 22:21:00 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:195 | Aadhaar Check 5: Layout authenticity
+2026-05-28 22:21:00 | WARNING  | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:207 | ⚠️ Layout: SUSPICIOUS
+2026-05-28 22:21:00 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:245 | Aadhaar verification: 2/2 checks passed | penalty=12 | risk=medium | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 22:21:00 | INFO     | app.services.pipeline:run_verify_pipeline:733 | Aadhaar deep verification: Aadhaar verification: 2/2 checks passed | penalty=12 | risk=medium | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 22:21:00 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 22:21:00 | INFO     | app.services.validation.field_validator:finalise:64 | Validation: 8/8 checks passed (0 critical failure(s))
+2026-05-28 22:21:00 | INFO     | app.services.pipeline:run_verify_pipeline:761 | After Aadhaar deep verification: risk_score=20 (aadhaar_penalty=12)
+2026-05-28 22:21:00 | INFO     | app.services.pipeline:run_verify_pipeline:781 | Verify pipeline done — type=aadhaar, risk=20, status=Likely Genuine, vlm=unknown, validation=8/8 checks passed (0 critical failure(s)), time=102839ms
+2026-05-28 22:21:00 | DEBUG    | app.utils.file_utils:cleanup_file:70 | Cleaned up temp file: app\uploads\dfb9b4fb173f47cc875185d63fa87a70.pdf
+2026-05-28 22:26:49 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 22:28:38 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 22:30:51 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 22:32:32 | DEBUG    | app.utils.file_utils:validate_upload:50 | File validated: name=krishna aadhar.pdf, size=1436364 B, mime=application/pdf
+2026-05-28 22:32:32 | DEBUG    | app.utils.file_utils:save_upload:61 | Saved upload → app\uploads\a91a97bd75c8461fb9b5ae2a375fbba6.pdf
+2026-05-28 22:32:32 | INFO     | app.api.routes.documents:analyze:388 | [/analyze] Processing: a91a97bd75c8461fb9b5ae2a375fbba6.pdf
+2026-05-28 22:32:36 | INFO     | app.services.preprocessing.image_processor:pdf_to_images:44 | PDF → 1 page(s) at 300 dpi: a91a97bd75c8461fb9b5ae2a375fbba6.pdf
+2026-05-28 22:32:36 | INFO     | app.services.pipeline:run_verify_pipeline:626 | Loaded 1 page(s)
+2026-05-28 22:33:10 | INFO     | app.services.layout.structure_engine:analyse_layout:24 | Detected 2 layout regions
+2026-05-28 22:33:15 | DEBUG    | app.services.preprocessing.image_processor:preprocess_image:146 | Preprocessed image shape: (1552, 1200)
+2026-05-28 22:33:15 | INFO     | app.services.ocr.engine:_get_paddle_ocr:33 | Initialising PaddleOCR engines…
+2026-05-28 22:33:24 | INFO     | app.services.ocr.engine:_get_paddle_ocr:53 | PaddleOCR engines ready.
+2026-05-28 22:33:44 | DEBUG    | app.services.ocr.engine:_run_paddle:200 | PaddleOCR: 87 lines extracted
+2026-05-28 22:33:44 | INFO     | app.services.ocr.engine:run_ocr:351 | Tesseract not available — using PaddleOCR only
+2026-05-28 22:33:44 | DEBUG    | app.services.ocr.engine:run_ocr:355 | OCR done — 87 lines, avg confidence=83.43%
+2026-05-28 22:33:44 | DEBUG    | app.services.pipeline:_run_ocr_on_pages:481 | Page 1: 87 lines, conf=83.43%
+2026-05-28 22:33:44 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   aadhaar: raw_score=11.50, hits=5
+2026-05-28 22:33:44 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   pan: raw_score=0.00, hits=0
+2026-05-28 22:33:44 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   passport: raw_score=0.00, hits=0
+2026-05-28 22:33:44 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   resume: raw_score=1.00, hits=1
+2026-05-28 22:33:44 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   graduation_certificate: raw_score=0.00, hits=0
+2026-05-28 22:33:44 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   marksheet: raw_score=0.00, hits=0
+2026-05-28 22:33:44 | INFO     | app.services.classification.document_classifier:classify_document:160 | Document classified as aadhaar (confidence=92.0%, ambiguous=False)
+2026-05-28 22:33:44 | INFO     | app.services.pipeline:run_verify_pipeline:641 | Classified as: aadhaar (confidence=92.0%, ambiguous=False)
+2026-05-28 22:33:44 | DEBUG    | app.services.parsers.field_parser:_parse_aadhaar:119 | Aadhaar fields: {'name': 'Krishna Sharma', 'dob': '10/07/2011', 'gender': None, 'aadhaar_number': '754219162433', 'address': 'C0: Ajay Sharma, Near Rallway statlon, Valshall, HR 4a aa aR yrqff n, Colony Doymi Road, Hapur, P0: Hapur, DIST:, 1 34 44 35 aqpqu, 1 3q3R /, Utr Pradesh - 245101, Aadhaar is proof of identity, not of citizenship', 'pincode': '245101'}
+2026-05-28 22:33:44 | INFO     | app.services.pipeline:run_verify_pipeline:652 | Running LLM credential extraction...
+2026-05-28 22:33:44 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:202 | LLM credential extraction → model=nvidia/llama-3.3-nemotron-super-49b-v1, url=https://integrate.api.nvidia.com/v1
+2026-05-28 22:33:53 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:208 | LLM credential extraction done — name=Krishna Sharma, doc_no=754219162433
+2026-05-28 22:33:53 | INFO     | app.services.pipeline:run_verify_pipeline:660 | Running VLM analysis via nvidia / qwen/qwen2.5-vl-72b-instruct...
+2026-05-28 22:33:53 | INFO     | app.services.vlm.claude_vlm:run_vlm_analysis:656 | VLM starting — 1 model(s) in chain
+2026-05-28 22:33:54 | INFO     | app.services.vlm.claude_vlm:_try_models:553 | VLM attempting → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 22:34:02 | INFO     | app.services.vlm.claude_vlm:_try_models:558 | VLM succeeded → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 22:34:02 | WARNING  | app.services.vlm.claude_vlm:run_vlm_analysis:718 | All VLM models failed: name 're' is not defined
+2026-05-28 22:34:05 | DEBUG    | app.services.forgery.ela:run_ela:75 | ELA → score=2.62, result=clean
+2026-05-28 22:34:06 | DEBUG    | app.services.forgery.blur:detect_blur:59 | Blur → variance=3282.74, result=sharp
+2026-05-28 22:34:06 | DEBUG    | app.services.forgery.metadata:analyse_metadata:43 | Metadata: PDF file — EXIF analysis not applicable, skipping
+2026-05-28 22:34:08 | DEBUG    | app.services.forgery.duplicate_regions:detect_duplicate_regions:92 | ORB → keypoints=1000, suspicious_pairs=0, result=not_detected
+2026-05-28 22:34:08 | DEBUG    | app.services.forgery.layout_validator:validate_layout:136 | Layout validation → valid (aadhaar)
+2026-05-28 22:34:08 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_dct_anomaly:97 | DCT mid-freq ratio=0.0014
+2026-05-28 22:34:09 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_noise_uniformity:130 | Noise uniformity=0.8209
+2026-05-28 22:34:09 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_edge_density:140 | Edge density=0.0506
+2026-05-28 22:34:09 | DEBUG    | app.services.forgery.ai_artifact_detector:detect_ai_artifacts:64 | AI artifact detection → flags=[False, False, False], positives=0, result=not_detected
+2026-05-28 22:34:12 | INFO     | app.services.qr.qr_decoder:decode_qr:56 | QR decoded (pyzbar) — 3034 chars, type=QRCODE
+2026-05-28 22:34:12 | INFO     | app.services.pipeline:run_verify_pipeline:696 | Running deep Aadhaar verification suite (Verhoeff + SecureQR + Font + Layout)...
+2026-05-28 22:34:12 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:103 | Aadhaar Check 1: Verhoeff checksum
+2026-05-28 22:34:12 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 22:34:12 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:112 | ✅ Verhoeff: PASS
+2026-05-28 22:34:12 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:124 | Aadhaar Check 2+3: Secure QR + OCR cross-match
+2026-05-28 22:34:13 | INFO     | app.services.aadhar.secure_qr:_extract_qr_bytes:129 | QR found via pyzbar — 3034 bytes
+2026-05-28 22:34:13 | INFO     | app.services.aadhar.secure_qr:_parse_text_payload:500 | Text QR parsed — fields: []
+2026-05-28 22:34:13 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:160 | ⚠️ QR cross-validation: suspicious
+2026-05-28 22:34:13 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:170 | Aadhaar Check 4: Font consistency
+2026-05-28 22:34:14 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:183 | ✅ Font consistency: CONSISTENT
+2026-05-28 22:34:14 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:196 | Aadhaar Check 5: Layout authenticity
+2026-05-28 22:34:14 | WARNING  | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:208 | ⚠️ Layout: SUSPICIOUS
+2026-05-28 22:34:14 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:246 | Aadhaar verification: 2/2 checks passed | penalty=12 | risk=medium | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 22:34:14 | INFO     | app.services.pipeline:run_verify_pipeline:733 | Aadhaar deep verification: Aadhaar verification: 2/2 checks passed | penalty=12 | risk=medium | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 22:34:14 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 22:34:14 | INFO     | app.services.validation.field_validator:finalise:64 | Validation: 8/8 checks passed (0 critical failure(s))
+2026-05-28 22:34:14 | INFO     | app.services.pipeline:run_verify_pipeline:761 | After Aadhaar deep verification: risk_score=20 (aadhaar_penalty=12)
+2026-05-28 22:34:14 | INFO     | app.services.pipeline:run_verify_pipeline:781 | Verify pipeline done — type=aadhaar, risk=20, status=Likely Genuine, vlm=unknown, validation=8/8 checks passed (0 critical failure(s)), time=102277ms
+2026-05-28 22:34:14 | DEBUG    | app.utils.file_utils:cleanup_file:70 | Cleaned up temp file: app\uploads\a91a97bd75c8461fb9b5ae2a375fbba6.pdf
+2026-05-28 22:42:14 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 23:05:56 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
+2026-05-28 23:06:57 | DEBUG    | app.utils.file_utils:validate_upload:50 | File validated: name=krishna aadhar.pdf, size=1436364 B, mime=application/pdf
+2026-05-28 23:06:57 | DEBUG    | app.utils.file_utils:save_upload:61 | Saved upload → app\uploads\24ae286b93b149c988cd6ed52e1fe39a.pdf
+2026-05-28 23:06:57 | INFO     | app.api.routes.documents:analyze:388 | [/analyze] Processing: 24ae286b93b149c988cd6ed52e1fe39a.pdf
+2026-05-28 23:07:01 | INFO     | app.services.preprocessing.image_processor:pdf_to_images:44 | PDF → 1 page(s) at 300 dpi: 24ae286b93b149c988cd6ed52e1fe39a.pdf
+2026-05-28 23:07:01 | INFO     | app.services.pipeline:run_verify_pipeline:626 | Loaded 1 page(s)
+2026-05-28 23:07:29 | INFO     | app.services.layout.structure_engine:analyse_layout:24 | Detected 2 layout regions
+2026-05-28 23:07:31 | DEBUG    | app.services.preprocessing.image_processor:preprocess_image:146 | Preprocessed image shape: (1552, 1200)
+2026-05-28 23:07:31 | INFO     | app.services.ocr.engine:_get_paddle_ocr:45 | Initialising PaddleOCR engines…
+2026-05-28 23:07:47 | INFO     | app.services.ocr.engine:_get_paddle_ocr:65 | PaddleOCR engines ready.
+2026-05-28 23:08:11 | DEBUG    | app.services.ocr.engine:_run_paddle:237 | PaddleOCR: 87 lines extracted
+2026-05-28 23:08:11 | INFO     | app.services.ocr.engine:_tesseract_available:90 | Tesseract available — version=5.5.0.20241111
+2026-05-28 23:08:18 | DEBUG    | app.services.ocr.engine:_run_tesseract:198 | Tesseract: 547 tokens extracted
+2026-05-28 23:08:18 | INFO     | app.services.ocr.engine:run_ocr:385 | Multi-engine OCR: fusing Tesseract + PaddleOCR results
+2026-05-28 23:08:19 | DEBUG    | app.services.ocr.engine:run_ocr:392 | OCR done — 113 lines, avg confidence=76.42%
+2026-05-28 23:08:19 | DEBUG    | app.services.pipeline:_run_ocr_on_pages:481 | Page 1: 113 lines, conf=76.42%
+2026-05-28 23:08:19 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   aadhaar: raw_score=12.00, hits=6
+2026-05-28 23:08:19 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   pan: raw_score=0.00, hits=0
+2026-05-28 23:08:19 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   passport: raw_score=0.00, hits=0
+2026-05-28 23:08:19 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   resume: raw_score=1.00, hits=1
+2026-05-28 23:08:19 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   graduation_certificate: raw_score=0.00, hits=0
+2026-05-28 23:08:19 | DEBUG    | app.services.classification.document_classifier:classify_document:139 |   marksheet: raw_score=0.00, hits=0
+2026-05-28 23:08:19 | INFO     | app.services.classification.document_classifier:classify_document:160 | Document classified as aadhaar (confidence=92.3%, ambiguous=False)
+2026-05-28 23:08:19 | INFO     | app.services.pipeline:run_verify_pipeline:641 | Classified as: aadhaar (confidence=92.3%, ambiguous=False)
+2026-05-28 23:08:19 | DEBUG    | app.services.parsers.field_parser:_parse_aadhaar:119 | Aadhaar fields: {'name': 'Krishna Sharma', 'dob': '10/07/2011', 'gender': 'Male', 'aadhaar_number': '754219162433', 'address': 'C0: Ajay Sharma, Near Rallway statlon, Valshall, HR 4a aa aR yrqff n, Colony Doymi Road, Hapur, P0: Hapur, DIST:, 1 34 44 35 aqpqu, 1 3q3R /, Utr Pradesh - 245101, Aadhaar is proof of identity, not of citizenship', 'pincode': '245101'}
+2026-05-28 23:08:19 | INFO     | app.services.pipeline:run_verify_pipeline:652 | Running LLM credential extraction...
+2026-05-28 23:08:19 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:202 | LLM credential extraction → model=nvidia/llama-3.3-nemotron-super-49b-v1, url=https://integrate.api.nvidia.com/v1
+2026-05-28 23:08:40 | INFO     | app.services.llm.credential_extractor:extract_credentials_with_llm:208 | LLM credential extraction done — name=Krishna Sharma, doc_no=754219162433
+2026-05-28 23:08:40 | INFO     | app.services.pipeline:run_verify_pipeline:660 | Running VLM analysis via nvidia / qwen/qwen2.5-vl-72b-instruct...
+2026-05-28 23:08:40 | INFO     | app.services.vlm.claude_vlm:run_vlm_analysis:656 | VLM starting — 1 model(s) in chain
+2026-05-28 23:08:40 | INFO     | app.services.vlm.claude_vlm:_try_models:553 | VLM attempting → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 23:08:49 | INFO     | app.services.vlm.claude_vlm:_try_models:558 | VLM succeeded → nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+2026-05-28 23:08:49 | WARNING  | app.services.vlm.claude_vlm:run_vlm_analysis:718 | All VLM models failed: No JSON found in VLM output:
+We need to produce JSON with required fields. Let's analyze document.
+
+Document type: It's an Aadhaar card (government ID). So document_type_confirmed: "aadhaar".
+
+vlm_confidence: need to assess OCR quality. The OCR text seems garbled but includes many correct fields. Confidence moderate. Probably around 0.8. Let's set 0.85.
+
+field_validation: need to list fields: Name, Address, VTC, PO, Sub District, District, State, PIN Code, Mobile, Enrolment No., Aadhaar No., VID, Date of Birth, etc.
+
+We nee
+2026-05-28 23:08:51 | DEBUG    | app.services.forgery.ela:run_ela:75 | ELA → score=2.62, result=clean
+2026-05-28 23:08:51 | DEBUG    | app.services.forgery.blur:detect_blur:59 | Blur → variance=3282.74, result=sharp
+2026-05-28 23:08:51 | DEBUG    | app.services.forgery.metadata:analyse_metadata:43 | Metadata: PDF file — EXIF analysis not applicable, skipping
+2026-05-28 23:08:55 | DEBUG    | app.services.forgery.duplicate_regions:detect_duplicate_regions:92 | ORB → keypoints=1000, suspicious_pairs=0, result=not_detected
+2026-05-28 23:08:55 | DEBUG    | app.services.forgery.layout_validator:validate_layout:136 | Layout validation → valid (aadhaar)
+2026-05-28 23:08:55 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_dct_anomaly:97 | DCT mid-freq ratio=0.0014
+2026-05-28 23:08:55 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_noise_uniformity:130 | Noise uniformity=0.8209
+2026-05-28 23:08:55 | DEBUG    | app.services.forgery.ai_artifact_detector:_check_edge_density:140 | Edge density=0.0506
+2026-05-28 23:08:55 | DEBUG    | app.services.forgery.ai_artifact_detector:detect_ai_artifacts:64 | AI artifact detection → flags=[False, False, False], positives=0, result=not_detected
+2026-05-28 23:08:58 | INFO     | app.services.qr.qr_decoder:decode_qr:56 | QR decoded (pyzbar) — 3034 chars, type=QRCODE
+2026-05-28 23:08:58 | INFO     | app.services.pipeline:run_verify_pipeline:696 | Running deep Aadhaar verification suite (Verhoeff + SecureQR + Font + Layout)...
+2026-05-28 23:08:58 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:103 | Aadhaar Check 1: Verhoeff checksum
+2026-05-28 23:08:58 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 23:08:58 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:112 | ✅ Verhoeff: PASS
+2026-05-28 23:08:58 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:124 | Aadhaar Check 2+3: Secure QR + OCR cross-match
+2026-05-28 23:09:00 | INFO     | app.services.aadhar.secure_qr:_extract_qr_bytes:129 | QR found via pyzbar — 3034 bytes
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.secure_qr:_parse_text_payload:500 | Text QR parsed — fields: []
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:160 | ⚠️ QR cross-validation: suspicious
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:170 | Aadhaar Check 4: Font consistency
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:183 | ✅ Font consistency: CONSISTENT
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:196 | Aadhaar Check 5: Layout authenticity
+2026-05-28 23:09:01 | WARNING  | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:208 | ⚠️ Layout: SUSPICIOUS
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.aadhaar_verifier:run_aadhaar_verification:246 | Aadhaar verification: 2/2 checks passed | penalty=12 | risk=medium | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 23:09:01 | INFO     | app.services.pipeline:run_verify_pipeline:733 | Aadhaar deep verification: Aadhaar verification: 2/2 checks passed | penalty=12 | risk=medium | verhoeff=True | qr=suspicious | font=consistent | layout=suspicious
+2026-05-28 23:09:01 | INFO     | app.services.aadhar.verhoeff:validate_aadhaar_checksum:124 | Aadhaar 7542**** Verhoeff: VALID
+2026-05-28 23:09:01 | INFO     | app.services.validation.field_validator:finalise:64 | Validation: 8/8 checks passed (0 critical failure(s))
+2026-05-28 23:09:01 | INFO     | app.services.pipeline:run_verify_pipeline:761 | After Aadhaar deep verification: risk_score=20 (aadhaar_penalty=12)
+2026-05-28 23:09:01 | INFO     | app.services.pipeline:run_verify_pipeline:781 | Verify pipeline done — type=aadhaar, risk=20, status=Likely Genuine, vlm=unknown, validation=8/8 checks passed (0 critical failure(s)), time=124583ms
+2026-05-28 23:09:01 | DEBUG    | app.utils.file_utils:cleanup_file:70 | Cleaned up temp file: app\uploads\24ae286b93b149c988cd6ed52e1fe39a.pdf
+2026-05-28 23:20:58 | INFO     | app.core.logging:setup_logging:43 | Logging initialised — level=DEBUG, file=logs/bgv.log
